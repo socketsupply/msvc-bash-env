@@ -1,0 +1,8 @@
+{
+  "name": "msvc-bash-env",
+  "version": "0.0.1",
+  "description": "Initialize a MSVC environment for your shell",
+  "install": "install -b msvc-bash-env.sh ${PREFIX:-/usr/local}/bin/msvc-bash-env",
+  "scripts": [ "msvc-bash-env.sh" ]
+}
+
