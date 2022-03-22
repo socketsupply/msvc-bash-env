@@ -4,7 +4,7 @@
 
 ##
 # Usage:
-# . vc-env.sh
+# . msvc-bash-env.sh
 ##
 
 declare VCVARSALL_BAT_SCRIPT=""
@@ -14,7 +14,7 @@ declare MSENV_BATCH_NAME=""
 declare MSENV_BATCH=""
 declare MSENV=""
 
-if [ -z "$MSENV_IS_SET" ]; then
+if [ -z "$MSENV_CXX" ] || [ -z "$MSENV_CC" ] || [ -z "$(which clang++)" ] || [ -z "$(which clang)" ]; then
   if [[ "$1" == "" ]]; then
     echo " info: Assuming $PLATFORM as platform"
     echo " info: Specify the platform as the first argument for this script to override"
@@ -71,15 +71,18 @@ if [ -z "$MSENV_IS_SET" ]; then
 
     source "$MSENV"
 
-    echo " info: clang++=$(which clang++)"
-    echo " info: Clang=$(which clang)"
+    MSENV_CXX="$(which clang++)"
+    MSENV_CC="$(which clang)"
+
+    echo " info: clang++=$MSENV_CXX"
+    echo " info: Clang=$MSENV_CC"
 
     rm -f "$MSENV_BATCH"
     rm -f "$MSENV.tmp"
     rm -f "$MSENV"
 
-    MSENV_IS_SET=1
-    export MSENV_IS_SET
+    export MSENV_CXX
+    export MSENV_CC
 
     export CXX
     export CC
