@@ -14,7 +14,7 @@ declare MSENV_BATCH_NAME=""
 declare MSENV_BATCH=""
 declare MSENV=""
 
-if [ -z "$MSENV_CXX" ] || [ -z "$MSENV_CC" ] || which clang++ >/dev/null 2>&1 || which clang >/dev/null 2>&1 ; then
+if [ -z "$MSENV_CXX" ] || [ -z "$MSENV_CC" ] || ! which clang++ >/dev/null 2>&1 || ! which clang >/dev/null 2>&1 ; then
   if [[ "$1" == "" ]]; then
     echo " info: Assuming $PLATFORM as platform"
     echo " info: Specify the platform as the first argument for this script to override"
