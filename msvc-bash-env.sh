@@ -37,6 +37,9 @@ if [ -z "$MSENV_CXX" ] || [ -z "$MSENV_CC" ] || ! which clang++ >/dev/null 2>&1 
         VCVARSALL_BAT_SCRIPT="/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Auxiliary/Build/vcvarsall.bat"
         if [ ! -e "$VCVARSALL_BAT_SCRIPT" ]; then
           VCVARSALL_BAT_SCRIPT="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat"
+          if [ ! -e "$VCVARSALL_BAT_SCRIPT" ]; then
+            VCVARSALL_BAT_SCRIPT=$(find /c/Program\ Files\ \(x86\)/ -name vcvarsall.bat -print -quit 2>/dev/null)
+          fi
         fi
       fi
     fi
@@ -75,7 +78,7 @@ if [ -z "$MSENV_CXX" ] || [ -z "$MSENV_CC" ] || ! which clang++ >/dev/null 2>&1 
     MSENV_CC="$(which clang)"
 
     echo " info: clang++=$MSENV_CXX"
-    echo " info: Clang=$MSENV_CC"
+    echo " info: clang=$MSENV_CC"
 
     rm -f "$MSENV_BATCH"
     rm -f "$MSENV.tmp"
